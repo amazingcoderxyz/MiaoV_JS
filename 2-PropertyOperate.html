@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2-属性操作</title>
+
+    <style>
+
+        body{
+            margin: 0;
+            padding: 0;
+        }
+
+        #container{
+            width: 300px;
+            height: 580px;
+            margin-top: 5%;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid black;
+            background-image: url('Image/phone_msg.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #text{
+            width: 250px;
+            height: 290px;
+            border: 1px solid grey;
+            position: relative;
+            left: 25px;
+            top: 136px;
+            background-color: gainsboro;
+            overflow: auto;
+        }
+
+        #img_emoji{
+            width: 23px;
+            height: 23px;
+            position: relative;
+            left: 30px;
+            top: 125px;
+        }
+
+        #input_msg{
+            width: 166px;
+            height: 18px;
+            border: 1px dashed gray;
+            position: relative;
+            left: 25px;
+            top: 120px;
+
+        }
+
+        #btn_send{
+            width: 47px;
+            height: 25px;
+            background-color: #52baff;
+            position: relative;
+            left: 18px;
+            top: 120px;
+            color: white;
+            font-weight: bold;
+        }
+
+    </style>
+
+    <script>
+        window.onload = function () {
+            var oBtnSend = document.getElementById('btn_send');
+            var oText = document.getElementById('text');
+            var oInputMsg = document.getElementById('input_msg');
+            var oImgEmoji = document.getElementById('img_emoji');
+
+            var arrEmoji = ['Image/emoji1.png', 'Image/emoji2.png'];
+            var onoff = true;
+            oImgEmoji.onclick = function () {
+                if(onoff){
+                    oImgEmoji.src = arrEmoji[1];
+                    onoff = false;
+                }else{
+                    oImgEmoji.src = arrEmoji[0];
+                    onoff = true;
+                }
+            };
+
+            oBtnSend.onclick = function () {
+                var inputText = oInputMsg.value;
+                oInputMsg.value = '';
+                if (inputText == '' || inputText == null || inputText ==' '){
+                    alert('请输入有效信息！');
+                }else{
+                    var msg = '';
+                    if (onoff){
+                        msg = "<img src='Image/emoji1.png' width=20px height=20px/>: <span style='color:blue;width:160px;word-wrap:break-word;word-break: break-all'>" + inputText + "</span></br>";
+                    }else{
+
+                        msg = "<span style='color:red; width:160px;word-wrap:break-word;word-break: break-all'>" + inputText + "</span> :<img src='Image/emoji2.png' width=20px height=20px/></br>";
+                        msg = "<p style='text-align: right'>" + msg + "</p>"
+                    }
+
+                    oText.innerHTML += msg;
+                }
+
+            };
+        }
+    </script>
+</head>
+<body>
+
+<div id="container">
+    <p id="text"></p>
+    <img src="Image/emoji1.png" id="img_emoji"/>
+    <input type="text" id="input_msg"/>
+    <input type="button" id="btn_send" value="Send"/>
+</div>
+
+</body>
+</html>

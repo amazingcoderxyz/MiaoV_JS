@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3-小实例之图片查看器</title>
+</head>
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+    }
+
+    #container{
+        width: 500px;
+        height: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1%;
+        border: 1px solid gainsboro;
+        background-image: url('#');
+        background-repeat: no-repeat;
+        background-size: auto;
+        background-position: center;
+    }
+
+    p {
+        height: 22px;
+        text-align: center;
+        background-color: gainsboro;
+        opacity: 0.4;
+    }
+
+    #img_num{
+        position: relative;
+        top: -15px;
+    }
+
+    #img_des{
+        position: relative;
+        top: 425px;
+    }
+
+    a{
+        display: block;
+        text-decoration: none;
+        text-align: center;
+        font-weight: bold;
+        width: 20px;
+        height: 10px;
+        padding-top: 210px;
+        padding-bottom: 200px;
+        opacity: 0.3;
+    }
+
+    #a_left{
+        position: relative;
+        top: -53px;
+    }
+
+    #a_right{
+        position: relative;
+        left: 480px;
+        top: -470px;
+    }
+
+    a:hover{
+        background-color: #6184bc;
+    }
+
+    #setting{
+        width: 200px;
+        height: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5%;
+    }
+</style>
+<script>
+    window.onload = function () {
+
+        var arrImage = ['Image/view1.jpg', 'Image/view2.jpg', 'Image/view3.jpg' ,'Image/view4.jpg'];
+        var arrImageDes = ['Kobe-24', 'Nash-13', 'Yao-11', '库日天-35'];
+        var oDiv = document.getElementById('container');
+        var oBtnLeft = document.getElementById('a_left');
+        var oBtnRight = document.getElementById('a_right');
+        var oImgNum = document.getElementById('img_num');
+        var oImgDes = document.getElementById('img_des');
+        var oBtnDirect = document.getElementById('btn_direct');
+        var oBtnCycle = document.getElementById('btn_cycle');
+        var oPrompt = document.getElementById('prompt');
+
+        var num = 0;
+        var bCycle = false;
+        function showImage() {
+            //alert('url('+arrImage[num]+')');
+            oDiv.style.backgroundImage = 'url('+arrImage[num]+')';
+            oImgNum.innerHTML = num+1 +'/' + arrImage.length;
+            oImgDes.innerHTML = arrImageDes[num];
+        }
+
+        showImage();
+
+        oBtnRight.onclick = function () {
+
+            if (num < arrImage.length-1) {
+                num++;
+                showImage();
+            }else{
+                if(bCycle){
+                    num = 0;
+                    showImage();
+                }else{
+                    alert('已经是最后一张图片了...');
+                }
+            }
+        };
+
+        oBtnLeft.onclick = function () {
+            if (num > 0) {
+                num--;
+                showImage();
+            }else{
+                if(bCycle){
+                    num = arrImage.length-1;
+                    showImage();
+                }else{
+                    alert('前面已经没有了...');
+                }
+            }
+        };
+
+        oBtnDirect.onclick = function () {
+            bCycle = false;
+            oPrompt.innerHTML = '<span style="color:blue">提示:</span>当前是单向查看模式';
+        };
+
+        oBtnCycle.onclick = function () {
+            bCycle = true;
+            oPrompt.innerHTML = '<span style="color:blue">提示:</span>当前是循环查看模式';
+        };
+    }
+</script>
+<body>
+<div id="setting">
+    <input type="button" id="btn_direct" value="单向查看">
+    <input type="button" id="btn_cycle" value="循环查看">
+    <p id="prompt"><span style="color:blue">提示:</span>当前是单向查看模式</p>
+</div>
+<div id="container">
+    <p id="img_num">图版数量加载中...</p>
+    <p id="img_des">图片描述加载中...</p>
+    <a href="#" id="a_left"><</a>
+    <a href="#" id="a_right">></a>
+</div>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1-js热身</title>
+    <style>
+        <!-- 兼容IE -->
+
+        body{
+            margin:0;
+            padding:0;
+        }
+
+        #container{
+            width: 600px;
+            height: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10%;
+        }
+
+        #content{
+            width: 400px;
+            height: 400px;
+            border: 2px solid black;
+        }
+
+        #btn_setting{
+            width: 400px;
+            height: 30px;
+        }
+
+        .org_block{
+            width: 200px;
+            height: 200px;
+            border:1px solid red;
+            background-color: #ffffff;
+        //position: relative;
+        //left:25%;
+        //right:25% ;
+            margin-left: auto;
+            margin-right: auto;
+        //text-align: center;
+        }
+
+        #setting{
+            width: 160px;
+            height: 120px;
+            background-color:beige;
+            border: 1px solid;
+            position: relative;
+            left: 403px;
+            top:-403px;
+            display:none;
+        }
+    </style>
+</head>
+
+<body>
+<script>
+    window.onload = function () {
+        var oBlock = document.getElementById("block");
+        var oSetting = document.getElementById("setting");
+        var oBtnSetting = document.getElementById("btn_setting");
+        var oBtnW1 = document.getElementById("btn_width_100");
+        var oBtnW2 = document.getElementById("btn_width_300");
+        var oBtnH1 = document.getElementById("btn_height_100");
+        var oBtnH2 = document.getElementById("btn_height_300");
+        var oBtnRed = document.getElementById("btn_red");
+        var oBtnGreen = document.getElementById("btn_green");
+        var oBtnBlue = document.getElementById("btn_blue");
+
+        var oBtnReset = document.getElementById("btn_reset");
+        var oBtnOk = document.getElementById("btn_ok");
+
+        oBtnSetting.onclick = function (){
+            oSetting.style.display = "block";
+        };
+
+        oBtnW1.onclick = function (){
+            oBlock.style.width = oBtnW1.value;
+        };
+
+        oBtnW2.onclick = function (){
+            oBlock.style.width = oBtnW2.value;
+        };
+
+        oBtnH1.onclick = function (){
+            oBlock.style.height = oBtnH1.value;
+        };
+
+        oBtnH2.onclick = function (){
+            oBlock.style.height = oBtnH2.value;
+        };
+
+        oBtnRed.onclick = function () {
+            oBlock.style.backgroundColor = 'red';
+        }
+
+        oBtnGreen.onclick = function () {
+            oBlock.style.backgroundColor = 'green';
+        }
+
+        oBtnBlue.onclick = function () {
+            oBlock.style.backgroundColor = 'blue';
+        }
+
+        oBtnReset.onclick = function (){
+            //oBlock.style.width = '200px';
+            //oBlock.style.height = '200px';
+            //oBlock.style.backgroundColor = '#fff';
+            oBlock.setAttribute('style', '');
+            oBlock.className = 'org_block';
+        };
+
+        oBtnOk.onclick = function (){
+            oSetting.style.display = "none";
+        };
+    }
+
+</script>
+<div id="container">
+    <div id="content">
+        <input type="button" id="btn_setting" value="设置样式>>" />
+        <div id="block" class="org_block"></div>
+    </div>
+    <div id="setting">
+        <div><strong>宽度:</strong><input type="button" id="btn_width_100" style="margin-right:8px" value="100px"/><input type="button" id="btn_width_300" value="300px"/></div>
+        <div><strong>高度:</strong><input type="button" id="btn_height_100" style="margin-right:8px" value="100px"/><input type="button" id="btn_height_300" value="300px"/></div>
+        <div><strong>颜色:</strong><input type="button" id="btn_red" style="margin-right:8px; background-color:red" value="红"/><input type="button" id="btn_green" style="margin-right:8px; background-color:green" value="绿"/><input type="button" id="btn_blue" style="background-color:blue" value="蓝"/></div>
+        <div style="margin-top: 20px"><input type="button" id="btn_reset" style="margin-left:15px;margin-right:50px" value="恢复"/><input type="button" id="btn_ok" value="确定"/></div>
+    </div>
+</div>
+
+</body>
+</html>
