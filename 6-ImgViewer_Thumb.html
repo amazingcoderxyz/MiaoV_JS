@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>6-带缩略图的图片查看器</title>
+    <style>
+        html, body{
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+
+        #container{
+            margin: 0;
+            height: 100%;
+            background-image: url('Image/background.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            text-align: center;
+        }
+
+        h2{
+            color: #6f4bff;
+            position: absolute;
+            top: 5%;
+            left: 400px;
+        }
+
+        #img1{
+            width: 900px;
+            height: 600px;
+            //display: block;
+            margin: 6% auto;
+        }
+
+        button{
+            height: 30px;
+            width: 10px;
+            font-weight: bold;
+            color: #1a2fff;
+        }
+        #left{
+            position:absolute;
+            left: 470px;
+            top: 400px
+        }
+
+        #right{
+            position:absolute;
+            left: 1420px;
+            top: 400px
+        }
+
+        a{
+            width: 50px;
+            height: 50px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            position: absolute;
+        }
+
+        #one{
+            left:880px;
+        }
+
+        #two{
+            left:910px;
+        }
+
+        #three{
+            left:940px;
+        }
+
+        #four{
+            left:970px;
+        }
+
+        #one,#two,#three,#four{
+            width: 25px;
+            height: 25px;
+            top:750px;
+        }
+
+        .a_normal{
+            background-image: url('Image/blue_yuan.jpg');
+        }
+
+        a:hover{
+            background-image: url('Image/green_yuan.png');
+        }
+
+        #thumb1{
+            width: 90px;
+            height: 60px;
+            border: 1px solid #52baff;
+            position: absolute;
+            left:845px;
+            top: 682px;
+            display: none;
+        }
+
+        #thumb2{
+            width: 90px;
+            height: 60px;
+            border: 1px solid #52baff;
+            position: absolute;
+            left:875px;
+            top: 682px;
+            display: none;
+        }
+
+
+        #thumb3{
+            width: 90px;
+            height: 60px;
+            border: 1px solid #52baff;
+            position: absolute;
+            left:905px;
+            top: 682px;
+            display: none;
+        }
+
+
+        #thumb4{
+            width: 90px;
+            height: 60px;
+            border: 1px solid #52baff;
+            position: absolute;
+            left:935px;
+            top: 682px;
+            display: none;
+        }
+
+    </style>
+    <script>
+        window.onload = function () {
+            var arrImg = ['Image/m1.jpg','Image/m2.jpg','Image/m3.jpeg','Image/m4.png'];
+            var oLeft = document.getElementById('left');
+            var oRight = document.getElementById('right');
+            var oImg = document.getElementById('img1');
+            var aA = document.getElementsByTagName('a');
+            var aThumbs = [];
+            aThumbs.push(document.getElementById('thumb1'));
+            aThumbs.push(document.getElementById('thumb2'));
+            aThumbs.push(document.getElementById('thumb3'));
+            aThumbs.push(document.getElementById('thumb4'));
+
+            var num = 0;
+            oLeft.onclick = function () {
+                num--;
+                num = num<0 ? arrImg.length-1 : num;
+                oImg.src = arrImg[num];
+            };
+
+            oRight.onclick = function () {
+                num++;
+                num = num>arrImg.length-1?0:num;
+                oImg.src = arrImg[num];
+            };
+
+            for(var i=0; i<aA.length; i++){
+                aA[i].index = i;
+                aA[i].onmousemove = function(){
+                    aThumbs[this.index].style.display = 'inline';
+
+                };
+
+                aA[i].onmouseout = function(){
+                    aThumbs[this.index].style.display = 'none';
+                };
+
+                aA[i].onclick = function () {
+                    oImg.src = arrImg[this.index];
+                }
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h2>带缩略图的图片查看器</h2>
+        <img id="img1" src="Image/m1.jpg"/>
+        <input type="button" id="left" value="《"/>
+        <input type="button" id="right" value="》"/>
+        <a id="one" class="a_normal"></a>
+        <a id="two" class="a_normal"></a>
+        <a id="three" class="a_normal"></a>
+        <a id="four" class="a_normal"></a>
+        <img id="thumb1" src="Image/m1.jpg"/>
+        <img id="thumb2" src="Image/m2.jpg"/>
+        <img id="thumb3" src="Image/m3.jpeg"/>
+        <img id="thumb4" src="Image/m4.png"/>
+    </div>
+</body>
+</html>

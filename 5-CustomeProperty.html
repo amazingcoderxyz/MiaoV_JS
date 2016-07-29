@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5-自定义属性</title>
+    <!--自定义属性最常用的场景就是index-->
+
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+
+        #list{
+            width: 150px;
+            margin: 50px auto;
+            border: 1px solid #6184bc;
+        }
+        #list h2{
+            height: 30px;
+            line-height:30px;
+            //text-indent: 20px;
+        }
+
+        ul ul li{
+            list-style: none;
+            border: 1px solid #52baff;
+            text-indent: 5px;
+        }
+
+        ul ul{
+            display: none;
+        }
+
+        .active{
+            background-color: aquamarine;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+            var oUl = document.getElementById('list');
+            var aH2 = document.getElementsByTagName('h2');
+            var aUlUl = oUl.getElementsByTagName('ul');
+            var alis = [];
+
+            for (var i = 0; i < aH2.length; i++) {
+
+                aH2[i].index = i;
+                aH2[i].coll = 1;
+                aUlUl.index = i;
+                aH2[i].onclick = function () {
+
+                    if (aH2[this.index].coll == 1) {
+                        aUlUl[this.index].style.display = 'block';
+                        aH2[this.index].coll = 0;
+                    } else {
+                        aUlUl[this.index].style.display = 'none';
+                        aH2[this.index].coll = 1;
+                    }
+                }
+            }
+
+            //所有子li
+            for (var j = 0; j < aUlUl.length; j++) {
+                var ali = aUlUl[j].getElementsByTagName('li');
+                for (var k = 0; k < ali.length; k++) {
+                    alis.push(ali[k]);
+                }
+            }
+
+            var lastActive = -1;
+            for (var m = 0; m < alis.length; m++) {
+                alis[m].index = m;
+                alis[m].onclick = function () {
+                    if (this.className == ''){
+                        this.className = 'active';
+                        if(lastActive >= 0) {
+                            alis[lastActive].className = '';
+                        }
+                        lastActive = this.index;
+                    }else{
+                        this.className = '';
+                        lastActive = -1;
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<ul id="list">
+    <li>
+        <h2>我的好友</h2>
+        <ul>
+            <li>张</li>
+            <li>王</li>
+            <li>赵</li>
+        </ul>
+    </li>
+
+    <li>
+        <h2>企业好友</h2>
+        <ul>
+            <li>周</li>
+            <li>李</li>
+            <li>吴</li>
+        </ul>
+    </li>
+    <li>
+        <h2>黑名单</h2>
+        <ul>
+            <li>孙</li>
+        </ul>
+    </li>
+</ul>
+</body>
+</html>

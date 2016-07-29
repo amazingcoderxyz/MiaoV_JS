@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>4-For循环应用</title>
+</head>
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+    }
+
+    #test{
+        position: relative;
+        top: 20px;
+
+    }
+    .copy{
+        width: 50px;
+        height: 50px;
+        background-color: #875b99;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        line-height:50px;   /*让文字在div中垂直居中。*/
+        position: absolute;
+    }
+
+</style>
+<script>
+    window.onload = function(){
+        var oTestDiv = document.getElementById('test');
+        var aDiv = oTestDiv.getElementsByTagName('div');    //动态获取，可以先在这获取，在后面添加
+        var oBtnInit = document.getElementById('show');         //静态获取的，必须先有这个元素才行
+        var oBtnLine = document.getElementById('show_line');
+        var oBtnVictory = document.getElementById('show_victory');
+
+
+        function Init() {
+            //alert(this);    //window
+            //alert(aDiv.length); //这是是0
+            var inBodyHtml = '';
+            var num = 42;      //想要多少个div?
+            for(var i=0; i<num; i++){
+                inBodyHtml += '<div class="copy">' + i + '</div>';
+            }
+            //先拼好字符串后再一次性修改innerHtml效率会更高，如果一个个更改innerHtml会很慢。
+            oTestDiv.innerHTML = inBodyHtml;
+            //alert(aDiv.length); //这里是num个
+
+            for(var i=0; i<aDiv.length; i++){
+                aDiv[i].style.left = i*60 + 'px';
+            }
+        }
+
+
+        oBtnInit.onclick = function () {
+            //alert(this);        //这种写法里面的this是调用者，即oBtn
+            Init();             //这种写法，Init里面的this肯定是window,即使用把这个方法的调用放在某相onclick事件函数中
+        };
+
+        //Init();
+
+        oBtnLine.onclick = function () {
+            //alert(this);
+            //alert(aDiv.length);
+            for(var i=0; i<aDiv.length; i++){
+                //aDiv[i].style.left = i*60 + 'px';
+                var j = i%10;
+                var k = Math.floor(i/10);
+                aDiv[i].style.left = j*60 + 'px';
+                aDiv[i].style.top = k*60 + 'px';
+            }
+        };
+
+        oBtnVictory.onclick =  function () {
+            //alert(this);        //这种写法里面的this是调用者，即oBtnVictory
+            //alert(aDiv.length);
+            var len = aDiv.length;
+            var half = Math.floor(len/2);
+            for(var i=0; i<len; i++){
+                aDiv[i].style.left = i*50 + 'px';
+                if(i<=half){
+                    aDiv[i].style.top = i*50 + 'px';
+                }else{
+                    aDiv[i].style.top = (len-i)*50 + 'px';
+                }
+
+            }
+        };
+    }
+</script>
+<body>
+<div id="bts">
+<input id="show" type="button" value="显示"/>
+<input id="show_line" type="button" value="换行显示"/>
+<input id="show_victory" type="button" value="V型显示"/>
+</div>
+<div id="test">
+
+</div>
+</body>
+</html>
