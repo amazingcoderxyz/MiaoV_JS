@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>7-类型转换</title>
+</head>
+<script>
+    window.onload = function () {
+        //类型：数字，字符串，object(arr,json,null),undefine, NaN(不是数字的数字类型), boolean
+        //typeof, isNaN(内部会调用Number来转换,nan!=nan, naa为false), parseInt, parseFloat,Number
+        //隐式类型转换（++， --， +（转成字符串），-、*、/转成数字 ）
+        var arr = ['100px', 'abc'-6, [], -9877, 34, -2, 0, '300', , null, document, true, '200px'-30, '23.45元', Number('abc'), function(){alert(3);} ];
+        var arrConvertNumber = [];
+        /*
+         1.找到所有数字
+         2.找到可以转换成数字的。
+         3.把转成数字以后的最大值找出来;
+         4.把NaN所在的位置找出来。
+         */
+        var a = '300px';  //NaN
+        var b = Number(a); //b -- NaN
+        var c = '300';      //not NaN
+        //alert(b);
+        //alert(isNaN(a));
+        findCanConvertToNumber();
+        findMax();
+        function findNumber() {
+            for(var i=0; i<arr.length; i++){
+                if(!isNaN(arr[i]) && Number(arr[i]) === arr[i]){
+                    alert(arr[i]);
+                }
+            }
+        }
+
+
+        function findCanConvertToNumber() {
+            for(var i=0; i<arr.length; i++){
+                if(!isNaN(arr[i]) && typeof arr[i] != 'number'){
+                    var num = Number(arr[i]);
+                    arrConvertNumber.push(num);
+                    alert(arr[i]);
+                }
+            }
+        }
+
+        function findMax(){
+            var Max = arrConvertNumber[0];
+            for(var i=1; i< arrConvertNumber.length; i++){
+                if(Max < arrConvertNumber[1]){
+                    Max = arrConvertNumber[1];
+                }
+            }
+
+            alert(Max);
+        }
+
+        function  findNanPosition() {
+            for(var i=0; i<arr.length; i++){
+                if(isNaN(arr[i]) ){
+                    alert( i );
+                }
+            }
+        }
+
+
+    }
+
+</script>
+<body>
+
+</body>
+</html>
